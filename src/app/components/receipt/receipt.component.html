@@ -1,0 +1,27 @@
+<mat-card class="list__item">
+  <mat-card-content class="header">
+    <div class="header__total">{{ receipt.total | currency:'€' }}</div>
+    <div class="header__date">{{ receipt.date.toDate() | date:'HH:mm - E d LLL yyyy' }}</div>
+  </mat-card-content>
+
+  <mat-card-content class="category">
+    <mat-form-field>
+      <mat-select placeholder="Category" [ngModel]="receipt.category" (selectionChange)="changed($event)">
+        <mat-option *ngFor="let category of categories" [value]="category">{{ category }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button color="accent" mat-icon-button (click)="createCategory()"><mat-icon>add</mat-icon></button>
+  </mat-card-content>
+
+  <img mat-card-image *ngIf="receipt.fileName | storageUrl | async as imageUri"
+       [src]="imageUri"
+       [alt]="receipt.fileName">
+
+  <mat-card-content title="Scanned: {{ receipt.created.toDate() | date:'full' }}">
+    <span>Imported {{ receipt.created.toDate() | amTimeAgo }}</span>
+  </mat-card-content>
+  <mat-divider></mat-divider>
+  <mat-card-actions>
+    <button (click)="deleteReceipt()" mat-icon-button color="danger"><mat-icon>delete</mat-icon></button>
+  </mat-card-actions>
+</mat-card>

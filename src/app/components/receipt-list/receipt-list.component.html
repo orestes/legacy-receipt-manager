@@ -1,0 +1,13 @@
+<article class="list__container">
+  <div class="list__empty" *ngIf="!receipts || !receipts.length">
+    <mat-card>No receipts to display</mat-card>
+  </div>
+  <app-receipt
+    class="list__item"
+    *ngFor="let receipt of receipts; trackBy: trackById"
+    [receipt]="receipt"
+    [categories]="categories"
+    (updated)="updated($event)"
+    (deleted)="deleted(receipt)"
+  ></app-receipt>
+</article>

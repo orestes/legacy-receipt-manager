@@ -1,0 +1,7 @@
+<mat-card class="stats__container">
+  <mat-card-header>
+    <mat-card-title>{{ total$ | async }}</mat-card-title>
+    <mat-card-subtitle>{{ receipts?.length || 'No' }} matching tickets</mat-card-subtitle>
+  </mat-card-header>
+  <app-tags-chart [data]="metrics$ | async"></app-tags-chart>
+</mat-card>

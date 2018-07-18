@@ -1,0 +1,23 @@
+<mat-toolbar color="primary">
+  <span>Receipts</span>
+</mat-toolbar>
+
+<div class="container">
+
+  <div class="row">
+    <app-filter
+      [categories]="categories$ | async"
+      (filtered)="filtered($event)"></app-filter>
+    <app-stats
+      [receipts]="receipts$ | async"></app-stats>
+  </div>
+
+  <div class="row">
+    <app-receipts-list
+      [receipts]="receipts$ | async"
+      [categories]="categories$ | async"
+      (receiptChanged)="updateReceipt($event)"
+      (receiptDeleted)="deleteReceipt($event)"></app-receipts-list>
+  </div>
+
+</div>
